@@ -1,17 +1,17 @@
 # main.yml
 
 - name: CONDA | install Anaconda
-  conda: name=anaconda
+  conda: name=anaconda executable={{ conda_dir }}/bin/conda
 
   # how to make jedi to work with emacs and anaconda
   # http://stackoverflow.com/questions/21703693/can-virtualenv-be-avoided-when-using-emacs-jedi-in-anaconda
 - name: CONDA | install Jedi
-  conda: name=jedi state=latest
+  conda: name=jedi executable={{ conda_dir }}/bin/conda state=latest
 
 - name: CONDA | install sexpdata
   #conda install -c https://conda.anaconda.org/nsidc sexpdata
-  conda: name=sexpdata state=latest channels="https://conda.anaconda.org/auto"
+  conda: name=sexpdata executable={{ conda_dir }}/bin/conda state=latest channels="https://conda.anaconda.org/auto"
 
 - name: CONDA | install EPC
   #conda install -c https://conda.anaconda.org/nsidc epc
-  conda: name=epc state=latest channels="https://conda.anaconda.org/auto"
+  conda: name=epc executable={{ conda_dir }}/bin/conda state=latest channels="https://conda.anaconda.org/auto"
