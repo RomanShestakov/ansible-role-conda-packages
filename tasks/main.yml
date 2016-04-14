@@ -11,7 +11,7 @@
 
 
 - name: CONDA | get conda-recipes from git repository
-  git: repo={{ conda-recipes-url }} dest="/tmp/conda-recipes" accept_hostkey=yes
+  git: repo={{ conda_recipes_url }} dest="/tmp/conda-recipes" accept_hostkey=yes
   register: conda_recipes_downloaded
 
 - name: CONDA | install conda-build
