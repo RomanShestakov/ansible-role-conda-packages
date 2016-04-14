@@ -1,17 +1,40 @@
 # main.yml
 
-- name: CONDA | install Anaconda
-  conda: name=anaconda executable={{ conda_dir }}/bin/conda
 
-  # how to make jedi to work with emacs and anaconda
-  # http://stackoverflow.com/questions/21703693/can-virtualenv-be-avoided-when-using-emacs-jedi-in-anaconda
-- name: CONDA | install Jedi
-  conda: name=jedi executable={{ conda_dir }}/bin/conda state=latest
 
-- name: CONDA | install sexpdata
-  #conda install -c https://conda.anaconda.org/nsidc sexpdata
-  conda: name=sexpdata executable={{ conda_dir }}/bin/conda state=latest channels="https://conda.anaconda.org/auto"
+# git clone https://github.com/conda/conda-recipes.git
+# conda install conda-build ipython
+# conda build conda-recipes/python/jedi
+# conda build conda-recipes/python/sexpdata
+# conda build conda-recipes/python/epc
+# conda install --use-local jedi sexpdata epc
 
-- name: CONDA | install EPC
-  #conda install -c https://conda.anaconda.org/nsidc epc
-  conda: name=epc executable={{ conda_dir }}/bin/conda state=latest channels="https://conda.anaconda.org/auto"
+
+- name: CONDA | get conda-recipes from git repository
+  git: repo={{ conda-recipes-url }} dest="/tmp/conda-recipes" accept_hostkey=yes
+  register: conda_recipes_downloaded
+
+- name: CONDA | install conda-build
+  conda: name=conda-build executable={{ conda_dir }}/bin/conda
+
+- name: CONDA | install ipython
+  conda: name=ipython executable={{ conda_dir }}/bin/conda
+
+
+
+
+# - name: CONDA | install Anaconda
+#   conda: name=anaconda executable={{ conda_dir }}/bin/conda
+
+#   # how to make jedi to work with emacs and anaconda
+#   # http://stackoverflow.com/questions/21703693/can-virtualenv-be-avoided-when-using-emacs-jedi-in-anaconda
+# - name: CONDA | install Jedi
+#   conda: name=jedi executable={{ conda_dir }}/bin/conda state=latest
+
+# - name: CONDA | install sexpdata
+#   #conda install -c https://conda.anaconda.org/nsidc sexpdata
+#   conda: name=sexpdata executable={{ conda_dir }}/bin/conda state=latest channels="https://conda.anaconda.org/auto"
+
+# - name: CONDA | install EPC
+#   #conda install -c https://conda.anaconda.org/nsidc epc
+#   conda: name=epc executable={{ conda_dir }}/bin/conda state=latest channels="https://conda.anaconda.org/auto"
