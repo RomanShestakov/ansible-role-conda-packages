@@ -21,8 +21,8 @@
   conda: name=ipython executable={{ conda_dir }}/bin/conda
 
 - name: CONDA | install jedi
-  conda: name=jedi executable={{ conda_dir }}/bin/conda source="/tmp/conda-recipes/python/jedi"
-
+  conda: name=jedi executable={{ conda_dir }}/bin/conda
+  source="/tmp/conda-recipes/python/jedi" extra_args="--use-local"
 
 
 # - name: CONDA | install Anaconda
