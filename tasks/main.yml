@@ -11,14 +11,13 @@
   conda: name=ipython executable={{ conda_dir }}/bin/conda
 
 - name: CONDA | install jedi
-  conda: name=jedi executable={{ conda_dir }}/bin/conda source="{{ conda_dest}}/python/jedi" extra_args="--use-local"
-
+  conda: name=jedi executable={{ conda_dir }}/bin/conda source={{ conda_dest }}/python/jedi extra_args="--use-local"
 
 - name: CONDA | install sexpdata
-  conda: name=sexpdata executable={{ conda_dir }}/bin/conda source="{{ conda_dest}}/python/sexpdata" extra_args="--use-local"
+  conda: name=sexpdata executable={{ conda_dir }}/bin/conda source={{ conda_dest }}/python/sexpdata extra_args="--use-local"
 
 - name: CONDA | install epc
-  conda: name=epc executable={{ conda_dir }}/bin/conda source="{{ conda_dest}}/python/epc" extra_args="--use-local"
+  conda: name=epc executable={{ conda_dir }}/bin/conda source={{ conda_dest }}/python/epc extra_args="--use-local"
 
 # - name: CONDA | install Anaconda
 #   conda: name=anaconda executable={{ conda_dir }}/bin/conda
