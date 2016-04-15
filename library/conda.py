@@ -202,6 +202,7 @@ def _build_package(module, conda, name, source):
 
     command = [
         conda,
+        'build',
         source
     ]
 
