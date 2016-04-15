@@ -156,8 +156,11 @@ def _remove_package(module, conda, installed, name):
     module.exit_json(changed=True, name=name, stdout=stdout, stderr=stderr)
 
 
-def _install_package(
-        module, conda, installed, name, version, installed_version):
+# conda install --use-local jedi sexpdata epc
+
+
+def _install_package(module, conda, installed, name, version,
+                     installed_version):
     """
     Install a package at a specific version, or install a missing package at
     the latest version if no version is specified.
@@ -192,6 +195,24 @@ def _install_package(
 
     module.exit_json(
         changed=True, name=name, version=version, stdout=stdout, stderr=stderr)
+
+
+def _build_package(module, conda, name, source):
+    """ Build package from source """
+
+    command = [
+        conda,
+        source
+    ]
+
+    rc, stdout, stderr = module.run_command(command)
+
+    if rc != 0:
+        module.fail_json(msg='failed to build package ' + source +
+                         ','.join(command) + stderr)
+
+    module.exit_json(
+        changed=True, name=name, source=source, stdout=stdout, stderr=stderr)
 
 
 def _update_package(module, conda, installed, name):
@@ -253,7 +274,8 @@ def main():
             },
             'channels': {'default': None, 'required': False},
             'executable': {'default': None, 'required': False},
-            'extra_args': {'default': None, 'required': False, 'type': 'str'}
+            'extra_args': {'default': None, 'required': False, 'type': 'str'},
+            'source': {'default': None, 'required': False, 'type': 'str'}
         },
         supports_check_mode=True)
 
@@ -261,8 +283,12 @@ def main():
     name = module.params['name']
     state = module.params['state']
     version = module.params['version']
+    source = module.params['source']
 
     installed, installed_version = _check_installed(module, conda, name)
+
+    if source:
+        _build_package(module, conda, name, source)
 
     if state == 'absent':
         _remove_package(module, conda, installed, name)
