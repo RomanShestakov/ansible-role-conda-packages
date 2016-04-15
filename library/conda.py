@@ -156,9 +156,6 @@ def _remove_package(module, conda, installed, name):
     module.exit_json(changed=True, name=name, stdout=stdout, stderr=stderr)
 
 
-# conda install --use-local jedi sexpdata epc
-
-
 def _install_package(module, conda, installed, name, version,
                      installed_version):
     """
@@ -209,11 +206,8 @@ def _build_package(module, conda, name, source):
     rc, stdout, stderr = module.run_command(command)
 
     if rc != 0:
-        module.fail_json(msg='failed to build package ' + source +
-                         ','.join(command) + stderr)
-
-    module.exit_json(
-        changed=True, name=name, source=source, stdout=stdout, stderr=stderr)
+        return False
+    return True
 
 
 def _update_package(module, conda, installed, name):
@@ -289,7 +283,7 @@ def main():
     installed, installed_version = _check_installed(module, conda, name)
 
     if source:
-        _build_package(module, conda, name, source)
+        built = _build_package(module, conda, name, source)
 
     if state == 'absent':
         _remove_package(module, conda, installed, name)
