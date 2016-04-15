@@ -1,17 +1,7 @@
 # main.yml
 
-
-
-# git clone https://github.com/conda/conda-recipes.git
-# conda install conda-build ipython
-# conda build conda-recipes/python/jedi
-# conda build conda-recipes/python/sexpdata
-# conda build conda-recipes/python/epc
-# conda install --use-local jedi sexpdata epc
-
-
 - name: CONDA | get conda-recipes from git repository
-  git: repo={{ conda_recipes_url }} dest="/tmp/conda-recipes" accept_hostkey=yes
+  git: repo={{ conda_recipes_url }} dest={{ conda_dest}} accept_hostkey=yes
   register: conda_recipes_downloaded
 
 - name: CONDA | install conda-build
@@ -21,8 +11,14 @@
   conda: name=ipython executable={{ conda_dir }}/bin/conda
 
 - name: CONDA | install jedi
-  conda: name=jedi executable={{ conda_dir }}/bin/conda source="/tmp/conda-recipes/python/jedi" extra_args="--use-local"
+  conda: name=jedi executable={{ conda_dir }}/bin/conda source="{{ conda_dest}}/python/jedi" extra_args="--use-local"
 
+
+- name: CONDA | install sexpdata
+  conda: name=sexpdata executable={{ conda_dir }}/bin/conda source="{{ conda_dest}}/python/sexpdata" extra_args="--use-local"
+
+- name: CONDA | install epc
+  conda: name=epc executable={{ conda_dir }}/bin/conda source="{{ conda_dest}}/python/epc" extra_args="--use-local"
 
 # - name: CONDA | install Anaconda
 #   conda: name=anaconda executable={{ conda_dir }}/bin/conda
