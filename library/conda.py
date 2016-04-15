@@ -206,7 +206,8 @@ def _build_package(module, conda, name, source):
     rc, stdout, stderr = module.run_command(command)
 
     if rc != 0:
-        return False
+        module.fail_json(msg='failed to build package ' + name +
+                         ','.join(command) + stderr)
     return True
 
 
@@ -283,7 +284,7 @@ def main():
     installed, installed_version = _check_installed(module, conda, name)
 
     if source:
-        built = _build_package(module, conda, name, source)
+        _build_package(module, conda, name, source)
 
     if state == 'absent':
         _remove_package(module, conda, installed, name)
