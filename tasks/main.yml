@@ -4,11 +4,11 @@
   git: repo={{ conda_recipes_url }} dest={{ conda_dest}} accept_hostkey=yes
   register: conda_recipes_downloaded
 
-# - name: CONDA | install conda-build
-#   conda: name=conda-build executable={{ conda_dir }}/bin/conda
+- name: CONDA | install conda-build
+  conda: name=conda-build executable={{ conda_dir }}/bin/conda
 
-# - name: CONDA | install ipython
-#   conda: name=ipython executable={{ conda_dir }}/bin/conda
+- name: CONDA | install ipython
+  conda: name=ipython executable={{ conda_dir }}/bin/conda
 
 # - name: CONDA | install jedi
 #   conda: name=jedi executable={{ conda_dir }}/bin/conda source={{ conda_dest }}/python/jedi extra_args="--use-local"
