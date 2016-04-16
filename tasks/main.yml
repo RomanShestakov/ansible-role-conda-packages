@@ -20,10 +20,6 @@
 #   conda: name=epc executable={{ conda_dir }}/bin/conda source={{ conda_dest }}/python/epc extra_args="--use-local"
 
 - name: CONDA | install "{{item}}"
-  conda:
-    name:"{{item}}"
-    executable:{{ conda_dir }}/bin/conda
-    source:{{ conda_dest }}/python/"{{item}}"
-    extra_args:"--use-local"
+  conda: name="{{item}}" executable={{ conda_dir }}/bin/conda source={{ conda_dest }}/python/"{{item}}" extra_args="--use-local"
   with_items: conda_packages
   register: output
