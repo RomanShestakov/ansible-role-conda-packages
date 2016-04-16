@@ -1,0 +1,14 @@
+# file: /vars/main.yml
+
+conda_packages:
+ - autoconf
+ - automake
+ - gcc
+ - bison
+ - flex
+ - gcc-c++
+ - gettext
+ - kernel-devel
+ - make
+ - m4
+ - ncurses-devel

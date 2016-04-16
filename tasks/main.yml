@@ -4,17 +4,26 @@
   git: repo={{ conda_recipes_url }} dest={{ conda_dest}} accept_hostkey=yes
   register: conda_recipes_downloaded
 
-- name: CONDA | install conda-build
-  conda: name=conda-build executable={{ conda_dir }}/bin/conda
+# - name: CONDA | install conda-build
+#   conda: name=conda-build executable={{ conda_dir }}/bin/conda
 
-- name: CONDA | install ipython
-  conda: name=ipython executable={{ conda_dir }}/bin/conda
+# - name: CONDA | install ipython
+#   conda: name=ipython executable={{ conda_dir }}/bin/conda
 
-- name: CONDA | install jedi
-  conda: name=jedi executable={{ conda_dir }}/bin/conda source={{ conda_dest }}/python/jedi extra_args="--use-local"
+# - name: CONDA | install jedi
+#   conda: name=jedi executable={{ conda_dir }}/bin/conda source={{ conda_dest }}/python/jedi extra_args="--use-local"
 
-- name: CONDA | install sexpdata
-  conda: name=sexpdata executable={{ conda_dir }}/bin/conda source={{ conda_dest }}/python/sexpdata extra_args="--use-local"
+# - name: CONDA | install sexpdata
+#   conda: name=sexpdata executable={{ conda_dir }}/bin/conda source={{ conda_dest }}/python/sexpdata extra_args="--use-local"
 
-- name: CONDA | install epc
-  conda: name=epc executable={{ conda_dir }}/bin/conda source={{ conda_dest }}/python/epc extra_args="--use-local"
+# - name: CONDA | install epc
+#   conda: name=epc executable={{ conda_dir }}/bin/conda source={{ conda_dest }}/python/epc extra_args="--use-local"
+
+- name: CONDA | install "{{item}}"
+  conda:
+    name:"{{item}}"
+    executable:{{ conda_dir }}/bin/conda
+    source:{{ conda_dest }}/python/"{{item}}"
+    extra_args:"--use-local"
+  with_items: conda_packages
+  register: output
