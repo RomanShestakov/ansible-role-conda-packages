@@ -10,7 +10,7 @@
 - name: CONDA | install ipython
   conda: name=ipython executable={{ conda_dir }}/bin/conda
 
-- name: CONDA | install "{{item}}"
+- name: CONDA | build and install packages
   conda: name="{{item}}" executable={{ conda_dir }}/bin/conda source={{ conda_dest }}/python/"{{item}}" extra_args="--use-local"
   with_items: conda_packages
   register: output
