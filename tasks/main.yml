@@ -5,8 +5,11 @@
   register: conda_recipes_downloaded
 
 - name: CONDA | get extra conda-recipes from git repository
-  git: repo={{ extra_conda_recipes_url }} dest={{ conda_dest }} accept_hostkey=yes
+  git: repo={{ extra_conda_recipes_url }} dest={{ extra_conda_dest }} accept_hostkey=yes
   register: conda_recipes_downloaded
+
+- name: CONDA | merge extra conda-recipes into main conda-recipes
+  command: mv {{ extra_conda_dest }}/* {{ conda_dest }}
 
 - name: CONDA | install conda-build
   conda: name=conda-build executable={{ conda_dir }}/bin/conda
