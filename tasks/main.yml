@@ -1,7 +1,11 @@
 # main.yml
 
 - name: CONDA | get conda-recipes from git repository
-  git: repo={{ conda_recipes_url }} dest={{ conda_dest}} accept_hostkey=yes
+  git: repo={{ conda_recipes_url }} dest={{ conda_dest }} accept_hostkey=yes
+  register: conda_recipes_downloaded
+
+- name: CONDA | get extra conda-recipes from git repository
+  git: repo={{ extra_conda_recipes_url }} dest={{ conda_dest }} accept_hostkey=yes
   register: conda_recipes_downloaded
 
 - name: CONDA | install conda-build

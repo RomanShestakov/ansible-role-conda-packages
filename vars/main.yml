@@ -4,3 +4,4 @@ conda_packages:
  - jedi
  - sexpdata
  - epc
+ - docker-py

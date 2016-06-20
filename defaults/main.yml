@@ -1,3 +1,4 @@
 conda_dir: "/home/vagrant/miniconda"
 conda_recipes_url: "https://github.com/conda/conda-recipes.git"
+extra_conda_recipes_url: "https://github.com/RomanShestakov/conda-recipes.git"
 conda_dest: "/tmp/conda-recipes"
