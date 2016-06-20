@@ -9,7 +9,12 @@
   register: conda_recipes_downloaded
 
 - name: CONDA | merge extra conda-recipes into main conda-recipes
-  command: cp -R {{ extra_conda_dest }}/* {{ conda_dest }}/
+  shell: ls -d {{ extra_conda_dest }}/
+  register: dir_names
+
+- name: CONDA | merge extra conda-recipes into main conda-recipes
+  command: mv {{ item }} {{ conda_dest }}/
+  with_items: dir_names.stdout_lines
 
 - name: CONDA | install conda-build
   conda: name=conda-build executable={{ conda_dir }}/bin/conda
