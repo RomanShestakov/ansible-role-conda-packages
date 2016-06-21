@@ -23,9 +23,9 @@
   conda: name=ipython executable={{ conda_dir }}/bin/conda
 
 - name: CONDA | build and install packages
-  conda: name={{ item }}
+  conda: name={{ item.name }}
          executable={{ conda_dir }}/bin/conda
-         source={{ conda_dest }}/{{ item }}
+         source={{ conda_dest }}/{{ item.path }}
          extra_args="--use-local"
   with_items: conda_packages
   register: output
