@@ -1,7 +1,7 @@
 # file: /vars/main.yml
 
 conda_packages:
- - jedi
- - sexpdata
- - epc
- - docker-py
+ - python/jedi
+ - python/sexpdata
+ - python/epc
+ - extra-conda-recipes/docker-py

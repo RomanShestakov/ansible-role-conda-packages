@@ -13,7 +13,7 @@
   register: dir_names
 
 - name: CONDA | merge extra conda-recipes into main conda-recipes
-  command: mv {{ item }} {{ conda_dest }}/
+  command: cp {{ item }} {{ conda_dest }}/
   with_items: dir_names.stdout_lines
 
 - name: CONDA | install conda-build
@@ -25,7 +25,7 @@
 - name: CONDA | build and install packages
   conda: name={{ item }}
          executable={{ conda_dir }}/bin/conda
-         source={{ conda_dest }}/python/{{ item }}
+         source={{ conda_dest }}/{{ item }}
          extra_args="--use-local"
   with_items: conda_packages
   register: output
