@@ -13,7 +13,7 @@
   register: dir_names
 
 - name: CONDA | merge extra conda-recipes into main conda-recipes
-  command: cp {{ item }} {{ conda_dest }}/
+  command: cp -R {{ item }} {{ conda_dest }}/
   with_items: dir_names.stdout_lines
 
 - name: CONDA | install conda-build
