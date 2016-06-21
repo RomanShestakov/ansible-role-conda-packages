@@ -4,4 +4,5 @@ conda_packages:
  - { name: jedi, path: python/jedi }
  - { name: sexpdata, path: python/sexpdata }
  - { name: epc, path: python/epc }
+ - { name: jinja2, path: python/jinja2 }
  - { name: docker-py, path: extra-conda-recipes/docker-py }
