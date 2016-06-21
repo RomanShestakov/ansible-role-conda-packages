@@ -9,7 +9,7 @@
   register: conda_recipes_downloaded
 
 - name: CONDA | get dirs that needs to be merged
-  shell: find {{ extra_conda_dest }} -type d
+  shell: find {{ extra_conda_dest }} -name ".git" -prune -o -print
   register: dir_names
 
 - name: CONDA | merge extra conda-recipes into main conda-recipes
