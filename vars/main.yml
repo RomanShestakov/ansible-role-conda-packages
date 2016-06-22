@@ -4,6 +4,6 @@ conda_packages:
  - { name: jedi, path: python/jedi }
  - { name: sexpdata, path: python/sexpdata }
  - { name: epc, path: python/epc }
- - { name: jinja2, path: python/jinja2 }
- - { name:  websocket-client, path: python/websocket-client }
- - { name: docker-py, path: extra-conda-recipes/docker-py }
+ # - { name: jinja2, path: python/jinja2 }
+ # - { name:  websocket-client, path: python/websocket-client }
+ # - { name: docker-py, path: extra-conda-recipes/docker-py }
