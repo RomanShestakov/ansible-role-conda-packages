@@ -203,6 +203,8 @@ def _build_package(module, conda, name, source):
         source
     ]
 
+    rc, stdout, stderr = module.run_command([conda, 'clean', '--lock'])
+
     rc, stdout, stderr = module.run_command(command)
 
     if rc != 0:

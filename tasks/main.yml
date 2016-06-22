@@ -28,4 +28,4 @@
          source={{ conda_dest }}/{{ item.path }}
          extra_args="--use-local"
   with_items: conda_packages
-  register: output
+  #register: output
