@@ -14,7 +14,7 @@
 
 - name: CONDA | merge extra conda-recipes into main conda-recipes
   command: cp -R {{ item }} {{ conda_dest }}/
-  with_items: dir_names.stdout_lines
+  with_items: "{{ dir_names.stdout_lines }} "
 
 - name: CONDA | install conda-build
   conda: name=conda-build executable={{ conda_dir }}/bin/conda
@@ -27,5 +27,5 @@
          executable={{ conda_dir }}/bin/conda
          source={{ conda_dest }}/{{ item.path }}
          extra_args="--use-local"
-  with_items: {{ conda_packages }}
+  with_items: "{{ conda_packages }}"
   #register: output
