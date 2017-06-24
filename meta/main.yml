@@ -14,4 +14,4 @@ galaxy_info:
 
 dependencies:
   - {role: geerlingguy.git, tags: git }
-  - {role: nicholsn.miniconda, tags: conda }
+  - {role: RomanShestakov.miniconda, tags: conda }
