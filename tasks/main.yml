@@ -10,7 +10,7 @@
 
 - name: CONDA | get dirs that needs to be merged
   shell: find {{ extra_conda_dest }} -name ".git" -prune -o -print
-  when: conda_recipes_downloaded.changed
+  # when: conda_recipes_downloaded.changed
 
 - name: CONDA | merge extra conda-recipes into main conda-recipes
   command: cp -R {{ item }} {{ conda_dest }}/
