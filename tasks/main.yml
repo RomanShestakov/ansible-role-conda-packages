@@ -6,21 +6,24 @@
 
 - name: CONDA | get extra conda-recipes from git repository
   git: repo={{ extra_conda_recipes_url }} dest={{ extra_conda_dest }} accept_hostkey=yes force=yes
-  register: conda_recipes_downloaded
+  when: conda_recipes_downloaded.changed
 
 - name: CONDA | get dirs that needs to be merged
   shell: find {{ extra_conda_dest }} -name ".git" -prune -o -print
-  register: dir_names
+  when: conda_recipes_downloaded.changed
 
 - name: CONDA | merge extra conda-recipes into main conda-recipes
   command: cp -R {{ item }} {{ conda_dest }}/
   with_items: "{{ dir_names.stdout_lines }} "
+  when: conda_recipes_downloaded.changed
 
 - name: CONDA | install conda-build
   conda: name=conda-build executable={{ conda_dir }}/bin/conda
+  when: conda_recipes_downloaded.changed
 
 - name: CONDA | install ipython
   conda: name=ipython executable={{ conda_dir }}/bin/conda
+  when: conda_recipes_downloaded.changed
 
 - name: CONDA | build and install packages
   conda: name={{ item.name }}
@@ -28,4 +31,4 @@
          source={{ conda_dest }}/{{ item.path }}
          extra_args="--use-local"
   with_items: "{{ conda_packages }}"
-  #register: output
+  when: conda_recipes_downloaded.changed
